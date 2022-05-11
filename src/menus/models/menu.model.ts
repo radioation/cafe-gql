@@ -10,7 +10,7 @@ export class Menu {
 
   @Field()
   @Column({ length: 50, nullable: false })
-  Name: string;
+  name: string;
 
   @Field({ nullable: true })
   @Column()
