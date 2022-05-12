@@ -2,6 +2,8 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateCol
 import { Directive, Field, ID, ObjectType } from '@nestjs/graphql';
 import { NumericTransformer } from '../../numeric.transformer';
 
+import { Menu } from '../../menus/models/menu.model';
+
 @ObjectType({ description: 'item' })
 @Entity()
 export class Item {
@@ -20,5 +22,9 @@ export class Item {
   @Field()
   @Column({ name: 'price', type: 'decimal', precision: 10, scale: 2, default: 0.0, transformer: new NumericTransformer() })
   price: string;
+
+  @Field( type => [Menu], { nullable: true } )
+  @ManyToMany( () => Menu, menu => menu.items )
+  menus: Menu[]
 
 }

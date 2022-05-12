@@ -17,4 +17,9 @@ export class MenuDto {
 
   @Field()
   endTime: number;
+
+
+  @Field( type => [String], { nullable: true } )
+  @IsOptional()
+  itemIds: string[];
 }
