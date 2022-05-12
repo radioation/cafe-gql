@@ -25,5 +25,10 @@ export class MenusResolver {
     return await this.menusService.getMenuById( id );
   }
 
+  @Mutation( returns => Menu )
+  async updateMenu(@Args('id') id: string, @Args('menu') menu: MenuDto) {
+    return this.menusService.updateMenu( id, menu );
+  }
+
 }
 

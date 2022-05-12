@@ -1,3 +1,5 @@
+import { NotFoundException } from '@nestjs/common';
+
 import { EntityRepository, Repository } from 'typeorm';
 import { Menu } from './models/menu.model';
 import { MenuDto } from './dto/menu.dto';
@@ -29,6 +31,22 @@ export class MenusRepository extends Repository< Menu > {
 
   async getMenuById( id: string ) : Promise< Menu > {
     const menu = this.findOne( { where : { id } } );
+    return menu;
+  }
+
+  async updateMenu ( id: string, menuDto: MenuDto,): Promise< Menu > {
+    const { name, description, startTime, endTime } = menuDto;
+    const menu = await this.getMenuById( id );
+
+    if( !menu ) {
+      throw new NotFoundException(`Menu with ID "${id}" not found`);
+    }
+    menu.name = name,
+      menu.description = description,
+      menu.startTime = startTime,
+      menu.endTime = endTime,
+
+      await this.save( menu );
     return menu;
   }
 

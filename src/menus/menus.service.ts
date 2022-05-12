@@ -31,4 +31,12 @@ export class MenusService {
     return menu;
   }
 
+  async updateMenu(
+    id: string,
+    menuDto: MenuDto
+  ) : Promise< Menu > {
+    return this.menusRepository.updateMenu( id, menuDto );
+
+  }
+
 }
