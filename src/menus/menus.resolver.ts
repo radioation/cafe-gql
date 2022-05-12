@@ -20,5 +20,10 @@ export class MenusResolver {
     return await this.menusService.createMenu( menu );
   }
 
+  @Query( returns => Menu )
+  async menu(@Args('id') id: string) : Promise< Menu > {
+    return await this.menusService.getMenuById( id );
+  }
+
 }
 

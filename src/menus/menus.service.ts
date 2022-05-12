@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { Menu } from './models/menu.model';
 import { MenuDto } from './dto/menu.dto';
@@ -19,6 +19,16 @@ export class MenusService {
 
   async createMenu( menuDto: MenuDto) : Promise< Menu > {
     return this.menusRepository.createMenu( menuDto );
+  }
+
+  getMenuById(
+    id: string
+  ) : Promise< Menu > {
+    const menu = this.menusRepository.getMenuById(id);
+    if( !menu ) {
+      throw new NotFoundException(`Menu with ID "${id}" not found.`);
+    }
+    return menu;
   }
 
 }

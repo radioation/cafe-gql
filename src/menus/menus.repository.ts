@@ -27,5 +27,9 @@ export class MenusRepository extends Repository< Menu > {
     return menu;
   }
 
+  async getMenuById( id: string ) : Promise< Menu > {
+    const menu = this.findOne( { where : { id } } );
+    return menu;
+  }
 
 }
