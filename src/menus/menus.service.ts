@@ -16,4 +16,9 @@ export class MenusService {
   async getMenus() : Promise< Menu[]> {
     return this.menusRepository.getMenus();
   }
+
+  async createMenu( menuDto: MenuDto) : Promise< Menu > {
+    return this.menusRepository.createMenu( menuDto );
+  }
+
 }
