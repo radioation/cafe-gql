@@ -39,4 +39,8 @@ export class MenusService {
 
   }
 
+  async deleteById( id: string ) : Promise< Menu >  {
+    return this.menusRepository.deleteById(id);
+  }
+
 }

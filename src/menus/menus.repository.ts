@@ -50,4 +50,13 @@ export class MenusRepository extends Repository< Menu > {
     return menu;
   }
 
+  async deleteById( id: string ) : Promise< Menu >  {
+    const menu = await this.getMenuById( id );
+    if( !menu ) {
+      throw new NotFoundException(`Menu with ID "${id}" not found.`);
+    }
+    this.delete( { id } );
+    return menu;
+  }
+
 }

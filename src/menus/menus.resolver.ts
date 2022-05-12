@@ -30,5 +30,10 @@ export class MenusResolver {
     return this.menusService.updateMenu( id, menu );
   }
 
+  @Mutation( returns => Menu )
+  async deleteById(@Args('id') id: string ) : Promise < Menu > {
+    return this.menusService.deleteById( id );
+  }
+
 }
 
