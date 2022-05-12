@@ -13,6 +13,6 @@ export class ItemDto {
   description?: string;
 
   @Field()
-  price: number;
+  price: string;
 
 }
