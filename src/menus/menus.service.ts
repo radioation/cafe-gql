@@ -6,11 +6,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import {  Repository } from 'typeorm';
 import { MenusRepository } from './menus.repository';
 
+import { ItemsRepository } from '../items/items.repository';
+
 @Injectable()
 export class MenusService {
   constructor(
     @InjectRepository( MenusRepository )
     private menusRepository: MenusRepository,
+    private itemsRepository: ItemsRepository,
   ){};
 
   async getMenus() : Promise< Menu[]> {
@@ -18,7 +21,9 @@ export class MenusService {
   }
 
   async createMenu( menuDto: MenuDto) : Promise< Menu > {
-    return this.menusRepository.createMenu( menuDto );
+    const { itemIds } = menuDto;
+    const items = itemIds ? await this.itemsRepository.getItemsById( itemIds ) : [];
+    return this.menusRepository.createMenu( menuDto, items );
   }
 
   getMenuById(
@@ -35,8 +40,9 @@ export class MenusService {
     id: string,
     menuDto: MenuDto
   ) : Promise< Menu > {
-    return this.menusRepository.updateMenu( id, menuDto );
-
+    const { itemIds } = menuDto;
+    const items = itemIds ? await this.itemsRepository.getItemsById( itemIds ) : [];
+    return this.menusRepository.updateMenu( id, menuDto, items );
   }
 
   async deleteById( id: string ) : Promise< Menu >  {

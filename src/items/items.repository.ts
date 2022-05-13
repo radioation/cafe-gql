@@ -1,5 +1,5 @@
 import { NotFoundException } from '@nestjs/common';
-import { EntityRepository, Repository } from 'typeorm';
+import { EntityRepository, Repository, In } from 'typeorm';
 import { Item } from './models/item.model';
 import { ItemDto } from './dto/item.dto';
 
@@ -7,7 +7,7 @@ import { ItemDto } from './dto/item.dto';
 @EntityRepository( Item )
 export class ItemsRepository extends Repository< Item > {
   async getItems() : Promise< Item[]> {
-    const items = await this.find();
+    const items = await this.find({ relations: ['menus'] } );
     return items;
   }
   async createItem( itemDto: ItemDto) : Promise< Item > {
@@ -24,8 +24,13 @@ export class ItemsRepository extends Repository< Item > {
   }
 
   async getItemById( id: string ) : Promise< Item > {
-    const item = this.findOne( { where : { id } } );
+    const item = this.findOne( { where : { id }, relations: ['menus']  } );
     return item;
+  }
+
+  async getItemsById( ids: string[] ) : Promise< Item[] > {
+    const items = await this.find( { where: { id: In(ids) }, relations: ['menus'] } );
+    return items;
   }
 
   async updateItem ( id: string, itemDto: ItemDto,): Promise< Item > {
