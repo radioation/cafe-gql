@@ -1,10 +1,10 @@
-# Description
+# About cafe-gql
 This project is a toy-example using [NestJS](https://github.com/nestjs/nest) and GraphQL.  
 I created it to teach myself how to implement a GraphQL server with NestJS, PostgreSQL and TypeORM.
 
 
 
-# Running
+# Running the Server
 This server requires a PostgreSQL database.  It also expects a database configuration file
 name ".env.stage.dev" in the root directory.  The file should provide the database name 
 and credentials you want to use.  For example, I created a database named 'cafe_gql' 
@@ -27,4 +27,4 @@ And connect to the server with a web-browser at http://localhost:3000/graphql
 
 
 # License
-THis project is [MIT licensed](LICENSE).
+This project is [MIT licensed](LICENSE).
