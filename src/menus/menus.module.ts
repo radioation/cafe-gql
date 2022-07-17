@@ -1,19 +1,13 @@
 import { Module } from '@nestjs/common';
-import { MenusService } from './menus.service';
-import { MenusResolver } from './menus.resolver';
-
-// Items Repository
-import { ItemsRepository } from '../items/items.repository';
-
-// Database 
-import { MenusRepository } from './menus.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { MenusService } from './menus.service';
+import { MenusResolver } from './menus.resolver';
+import { Menu } from './models/menu.model';
+import { Item } from '../items/models/item.model';
+
 @Module({
-  imports:[ TypeOrmModule.forFeature( [
-    MenusRepository,
-    ItemsRepository,
-  ])],
+  imports:[ TypeOrmModule.forFeature( [ Menu, Item ])],
   providers: [MenusService, MenusResolver],
   exports: [MenusService]
 })

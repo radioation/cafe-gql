@@ -22,4 +22,5 @@ export class MenuDto {
   @Field( type => [String], { nullable: true } )
   @IsOptional()
   itemIds: string[];
+
 }

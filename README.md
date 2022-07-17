@@ -21,7 +21,7 @@ DB_PASSWORD=postgres
 
 To run the server use
 ~~~bash
-$ yarn start:dev
+$ npm run start:dev
 ~~~
 And connect to the server with a web-browser at http://localhost:3000/graphql
 

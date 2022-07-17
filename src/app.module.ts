@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-// GraphQL 
+// GraphQL
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
@@ -18,17 +18,14 @@ import { ItemsModule } from './items/items.module';
 
 @Module({
   imports: [
-
     ConfigModule.forRoot({
       envFilePath: [`.env.stage.${process.env.STAGE}`],
       validationSchema: configValidationSchema,
     }),
-
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'schema.gql',
     }),
-
     TypeOrmModule.forRootAsync({
       imports:[ ConfigModule ],
       inject: [ ConfigService ],
@@ -45,10 +42,8 @@ import { ItemsModule } from './items/items.module';
         }
       },
     }),
-
     MenusModule,
-
-    ItemsModule
+    ItemsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
