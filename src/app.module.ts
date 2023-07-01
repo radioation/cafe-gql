@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 
 // GraphQL
-import { GraphQLModule } from '@nestjs/graphql';
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { GraphQLModule } from "@nestjs/graphql";
+import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 
 // App Configuration
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -11,21 +11,21 @@ import { configValidationSchema } from './config.schema';
 // Database
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MenusModule } from './menus/menus.module';
-import { ItemsModule } from './items/items.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: [`.env.stage.${process.env.STAGE}`],
       validationSchema: configValidationSchema,
-    }),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
-      driver: ApolloDriver,
-      autoSchemaFile: 'schema.gql',
-    }),
+    }),    
+     GraphQLModule.forRoot<ApolloDriverConfig>({
+       driver: ApolloDriver,
+       autoSchemaFile: "schema.gql", 
+     }),
     TypeOrmModule.forRootAsync({
       imports:[ ConfigModule ],
       inject: [ ConfigService ],
@@ -42,9 +42,7 @@ import { ItemsModule } from './items/items.module';
         }
       },
     }),
-    MenusModule,
-    ItemsModule,
-  ],
+    MenusModule],
   controllers: [AppController],
   providers: [AppService],
 })
