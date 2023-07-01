@@ -14,7 +14,7 @@ export class ItemsService {
   ) {}
 
   async getItems() : Promise< Item[]> {
-    return this.itemsRepository.find();
+    return this.itemsRepository.find( { relations: ['menus'] } );
   }
 
 
@@ -34,7 +34,7 @@ export class ItemsService {
   getItemById(
     id: string
   ) : Promise< Item > {
-    const item = this.itemsRepository.findOne( { where : { id  } } );
+    const item = this.itemsRepository.findOne( { where : { id  }, relations: ['menus'] } );
 
     if( !item ) {
       throw new NotFoundException(`Item with ID "${id}" not found.`);

@@ -6,6 +6,10 @@ import {
   UpdateDateColumn,
   ManyToMany,
 } from "typeorm";
+
+
+import { Menu } from "../../menus/models/menu.model";
+
 import { Directive, Field, ID, ObjectType } from "@nestjs/graphql";
 import { NumericTransformer } from "../../numeric.transformer";
 
@@ -34,4 +38,10 @@ export class Item {
     transformer: new NumericTransformer(),
   })
   price: string;
+
+  @Field( type => [Menu], { nullable: true } )
+  @ManyToMany( () => Menu, menu => menu.items )
+  menus: Menu[]
+
+
 }
